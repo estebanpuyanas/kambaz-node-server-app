@@ -67,5 +67,5 @@ export default function WorkingWithArrays(app) {
   app.get("/lab5/todos/create", createNewTodo);
   app.get("/lab5/todos/:id", getTodoById);
   app.get("/lab5/todos/:id/completed/:completed", updateTodoCompleted);
-  app.get("/lab5/todos/:id/description/:description:", updateTodoDescription);
+  app.get("/lab5/todos/:id/description/:description", updateTodoDescription);
 }
