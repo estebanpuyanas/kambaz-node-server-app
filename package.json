@@ -1,0 +1,24 @@
+{
+  "type": "module",
+  "name": "kambaz-node-server-app",
+  "version": "1.0.0",
+  "description": "NodeJS HTTP Server for the Kambaz Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/estebanpuyanas/kambaz-node-server-app.git"
+  },
+  "author": "Esteban Puyana Salazar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/estebanpuyanas/kambaz-node-server-app/issues"
+  },
+  "homepage": "https://github.com/estebanpuyanas/kambaz-node-server-app#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
