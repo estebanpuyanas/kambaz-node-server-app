@@ -1,8 +1,8 @@
 let todos = [
-  { id: 1, title: "Task 1", completed: false },
-  { id: 2, title: "Task 2", completed: true },
-  { id: 3, title: "Task 3", completed: false },
-  { id: 4, title: "Task 4", completed: true },
+  { id: 1, title: "Task 1", completed: false, description: "This is task 1" },
+  { id: 2, title: "Task 2", completed: true, description: "This is task 2" },
+  { id: 3, title: "Task 3", completed: false, description: "This is task 3" },
+  { id: 4, title: "Task 4", completed: true, description: "This is task 4" },
 ];
 
 export default function WorkingWithArrays(app) {
@@ -47,9 +47,25 @@ export default function WorkingWithArrays(app) {
     res.json(todos);
   };
 
+  const updateTodoCompleted = (req, res) => {
+    const { id, completed } = req.params;
+    const todo = todos.find((t) => t.id === parseInt(id));
+    todo.completed = completed === "true";
+    res.json(todos);
+  };
+
+  const updateTodoDescription = (req, res) => {
+    const { id, description } = req.params;
+    const todo = todos.find((t) => t.id === parseInt(id));
+    todo.description = description;
+    res.json(todos);
+  };
+
   app.get("/lab5/todos/:id/title/:title", updateTodoTitle);
   app.get("/lab5/todos/:id/delete", removeTodo);
   app.get("/lab5/todos", getTodos);
   app.get("/lab5/todos/create", createNewTodo);
   app.get("/lab5/todos/:id", getTodoById);
+  app.get("/lab5/todos/:id/completed/:completed", updateTodoCompleted);
+  app.get("/lab5/todos/:id/description/:description:", updateTodoDescription);
 }
