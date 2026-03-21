@@ -14,7 +14,9 @@ export default function UserRoutes(app, db) {
   const updateUser = (req, res) => {
     const userId = req.params.userId;
     const userUpdates = req.body;
+
     dao.updateUser(userId, userUpdates);
+
     const currentUser = dao.findUserById(userId);
     req.session["currentUser"] = currentUser;
     res.json(currentUser);
