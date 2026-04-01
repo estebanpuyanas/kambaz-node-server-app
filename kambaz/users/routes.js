@@ -8,20 +8,36 @@ export default function UserRoutes(app) {
   const deleteUser = (req, res) => {};
 
   const findAllUsers = async (req, res) => {
+    const { role, name } = req.query;
+    if (role) {
+      const users = await dao.findUsersByRole(role);
+      res.json(users);
+      return;
+    }
+
+    if (name) {
+      const users = await dao.findUsersByPartialName(role);
+      res.json(users);
+      return;
+    }
+
     const users = await dao.findAllUsers();
     res.json(users);
   };
 
-  const findUserById = (req, res) => {};
+  const findUserById = async (req, res) => {
+    const user = await dao.findUserById(req.params.userId);
+    res.json(user);
+  };
 
-  const updateUser = (req, res) => {
-    const userId = req.params.userId;
+  const updateUser = async (req, res) => {
+    const { userId } = req.params;
     const userUpdates = req.body;
-
-    dao.updateUser(userId, userUpdates);
-
-    const currentUser = dao.findUserById(userId);
-    req.session["currentUser"] = currentUser;
+    await dao.updateUser(userId, userUpdates);
+    const currentUser = req.session["currentUser"];
+    if (currentUser && currentUser._id === userId) {
+      req.session["currentUser"] = { ...currentUser, ...userUpdates };
+    }
     res.json(currentUser);
   };
 

@@ -1,12 +1,9 @@
-import { v4 as uuidv4 } from "uuid";
 import model from "./model.js";
 
 export default function UsersDao() {
-  // This will be changed later in this chapter.
-  const createUser = (user) => {
-    const newUser = { ...user, _id: uuidv4() };
-    users = [...users, newUser];
-    return newUser;
+  const createUser = async (req, res) => {
+    const user = await dao.createUser(req.body);
+    res.json(user);
   };
 
   const findAllUsers = () => model.find();
@@ -21,7 +18,19 @@ export default function UsersDao() {
   const updateUser = (userId, user) =>
     model.updateOne({ _id: userId }, { $set: user });
 
-  const deleteUser = (userId) => model.deleteOne({ _id: userId });
+  const deleteUser = async (req, res) => {
+    const status = await dao.deleteUser(req.params.userId);
+    res.json(status);
+  };
+
+  const findUsersByRole = (role) => model.find({ role });
+
+  const findUsersByPartialName = (partialName) => {
+    const regex = new RegExp(partialName, "i"); // 'i' makes it case-insensitive
+    return model.find({
+      $or: [{ firstName: { $regex: regex } }, { lastName: { $regex: regex } }],
+    });
+  };
 
   return {
     createUser,
@@ -31,5 +40,7 @@ export default function UsersDao() {
     findUserByCredentials,
     updateUser,
     deleteUser,
+    findUsersByRole,
+    findUsersByPartialName,
   };
 }
