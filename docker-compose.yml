@@ -1,0 +1,16 @@
+services:
+  mongodb:
+    image: mongo:7-jammy
+    command: ["--wiredTigerCacheSizeGB", "1.5"]
+    mem_limit: 4g
+    container_name: kambaz-db
+    restart: unless-stopped
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=kambaz
+
+volumes:
+  mongodb_data:
