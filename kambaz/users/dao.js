@@ -16,7 +16,7 @@ export default function UsersDao() {
   const findUserByUsername = (username) => model.findOne({ username });
 
   const findUserByCredentials = (username, password) =>
-    model.finOne({ username, password });
+    model.findOne({ username, password });
 
   const updateUser = (userId, user) =>
     model.updateOne({ _id: userId }, { $set: user });
