@@ -27,7 +27,12 @@ export default function EnrollmentsDao(db) {
     return model.deleteMany({ course: courseId });
   }
 
+  async function findEnrollmentsForUser(userId) {
+    return model.find({ user: userId });
+  }
+
   return {
+    findEnrollmentsForUser,
     findCoursesForUser,
     findUsersForCourse,
     enrollUserInCourse,
