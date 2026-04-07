@@ -22,7 +22,7 @@ export default function UserRoutes(app) {
     }
 
     if (name) {
-      const users = await dao.findUsersByPartialName(role);
+      const users = await dao.findUsersByPartialName(name);
       res.json(users);
       return;
     }
