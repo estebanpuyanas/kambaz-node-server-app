@@ -16,7 +16,7 @@ export default function AssignmentsDao() {
   }
 
   async function updateAssignment(assignmentId, assignmentUpdates) {
-    return model.findByIdAndUpdate(assignmentId, assignmentUpdates, { new: true });
+    return model.findByIdAndUpdate(assignmentId, { $set: assignmentUpdates }, { new: true });
   }
 
   return {
