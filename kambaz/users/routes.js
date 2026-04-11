@@ -22,7 +22,7 @@ export default function UserRoutes(app) {
     }
 
     if (name) {
-      const users = await dao.findUsersByPartialName(role);
+      const users = await dao.findUsersByPartialName(name);
       res.json(users);
       return;
     }
@@ -41,10 +41,13 @@ export default function UserRoutes(app) {
     const userUpdates = req.body;
     await dao.updateUser(userId, userUpdates);
     const currentUser = req.session["currentUser"];
-    if (currentUser && currentUser._id === userId) {
-      req.session["currentUser"] = { ...currentUser, ...userUpdates };
+    if (currentUser && String(currentUser._id) === userId) {
+      const updated = { ...currentUser, ...userUpdates };
+      req.session["currentUser"] = updated;
+      res.json(updated);
+    } else {
+      res.json(currentUser);
     }
-    res.json(currentUser);
   };
 
   const signup = async (req, res) => {
@@ -53,7 +56,7 @@ export default function UserRoutes(app) {
       res.status(400).json({ message: "Username already in use" });
       return;
     }
-    currentUser = dao.createUser(req.body);
+    const currentUser = await dao.createUser(req.body);
     req.session["currentUser"] = currentUser;
     res.json(currentUser);
   };

@@ -1,10 +1,7 @@
 import model from "./model.js";
 
 export default function UsersDao() {
-  const createUser = async (req, res) => {
-    const user = await dao.createUser(req.body);
-    res.json(user);
-  };
+  const createUser = (user) => model.create(user);
 
   const findAllUsers = () => model.find();
 
@@ -18,10 +15,7 @@ export default function UsersDao() {
   const updateUser = (userId, user) =>
     model.updateOne({ _id: userId }, { $set: user });
 
-  const deleteUser = async (req, res) => {
-    const status = await dao.deleteUser(req.params.userId);
-    res.json(status);
-  };
+  const deleteUser = (userId) => model.deleteOne({ _id: userId });
 
   const findUsersByRole = (role) => model.find({ role });
 
