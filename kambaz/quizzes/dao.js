@@ -20,7 +20,7 @@ export default function QuizzesDao() {
   }
 
   async function updateQuiz(quizId, quizUpdates) {
-    return model.findByIdAndUpdate(quizId, { $set: quizUpdates }, { new: true });
+    return model.findByIdAndUpdate(quizId, { $set: quizUpdates }, { returnDocument: 'after' });
   }
 
   return {
