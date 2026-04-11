@@ -11,6 +11,7 @@ import CourseRoutes from "./kambaz/courses/routes.js";
 import AssignmentsRoutes from "./kambaz/assignments/routes.js";
 import EnrollmentsRoutes from "./kambaz/enrollments/routes.js";
 import ModulesRoutes from "./kambaz/modules/routes.js";
+import QuizzesRoutes from "./kambaz/quizzes/routes.js";
 
 const MONGODB_URI =
   process.env.MONGODB_URI || "mongodb://localhost:27018/kambaz";
@@ -47,6 +48,7 @@ CourseRoutes(app, db);
 AssignmentsRoutes(app);
 EnrollmentsRoutes(app, db);
 ModulesRoutes(app, db);
+QuizzesRoutes(app);
 
 Lab5(app);
 Hello(app);
