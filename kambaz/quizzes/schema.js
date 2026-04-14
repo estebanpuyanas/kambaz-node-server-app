@@ -7,7 +7,12 @@ const questionSchema = new mongoose.Schema(
     title: String,
     type: {
       type: String,
-      enum: ["MULTIPLE_CHOICE", "MULTIPLE_SELECT", "TRUE_FALSE", "FILL_IN_BLANK"],
+      enum: [
+        "MULTIPLE_CHOICE",
+        "MULTIPLE_SELECT",
+        "TRUE_FALSE",
+        "FILL_IN_BLANK",
+      ],
       default: "MULTIPLE_CHOICE",
     },
     points: { type: Number, default: 1 },
@@ -31,7 +36,12 @@ const quizSchema = new mongoose.Schema(
     published: { type: Boolean, default: false },
     quizType: {
       type: String,
-      enum: ["GRADED_QUIZ", "PRACTICE_QUIZ", "GRADED_SURVEY", "UNGRADED_SURVEY"],
+      enum: [
+        "GRADED_QUIZ",
+        "PRACTICE_QUIZ",
+        "GRADED_SURVEY",
+        "UNGRADED_SURVEY",
+      ],
       default: "GRADED_QUIZ",
     },
     assignmentGroup: {
